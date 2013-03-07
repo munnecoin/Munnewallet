@@ -538,7 +538,10 @@ void StakeMiner(CWallet *pwallet)
 
         while (pwallet->IsLocked())
         {
+<<<<<<< HEAD
             nLastCoinStakeSearchInterval = 0;
+=======
+>>>>>>> 840f5ab... Rename util.h Sleep --> MilliSleep
             MilliSleep(1000);
             if (fShutdown)
                 return;
@@ -546,8 +549,11 @@ void StakeMiner(CWallet *pwallet)
 
         while (vNodes.empty() || IsInitialBlockDownload())
         {
+<<<<<<< HEAD
             nLastCoinStakeSearchInterval = 0;
             fTryToSync = true;
+=======
+>>>>>>> 840f5ab... Rename util.h Sleep --> MilliSleep
             MilliSleep(1000);
             if (fShutdown)
                 return;
@@ -581,5 +587,10 @@ void StakeMiner(CWallet *pwallet)
         }
         else
             MilliSleep(nMinerSleep);
+<<<<<<< HEAD
+=======
+
+        continue;
+>>>>>>> 840f5ab... Rename util.h Sleep --> MilliSleep
     }
 }
