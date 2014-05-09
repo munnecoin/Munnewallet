@@ -242,7 +242,6 @@ class Repairer {
   }
 
   void ExtractMetaData() {
-    std::vector<TableInfo> kept;
     for (size_t i = 0; i < table_numbers_.size(); i++) {
       TableInfo t;
       t.meta.number = table_numbers_[i];
