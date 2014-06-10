@@ -48,12 +48,6 @@ inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MO
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 
-#ifdef USE_UPNP
-static const int fHaveUPnP = true;
-#else
-static const int fHaveUPnP = false;
-#endif
-
 static const uint256 hashGenesisBlock("0x00000e4a59464d536a14d35b7a2811c9d8d0873d790bfce1e1e63ca436384e63");
 static const uint256 hashGenesisBlockTestNet("0x00000e4a59464d536a14d35b7a2811c9d8d0873d790bfce1e1e63ca436384e63");
 
