@@ -1,0 +1,35 @@
+src/*.exe
+src/Munne
+src/Munned
+src/test_Munne
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.o
+*.patch
+.Munne
+
+# Compilation and Qt preprocessor part
+*.qm
+Makefile
+Munne-qt
+Munne-Qt.app
+
+# Unit-tests
+Makefile.test
+Munne-qt_test
+
+# Resources cpp
+qrc_*.cpp
+
+# Qt creator
+*.pro.user
+
+# Mac specific
+.DS_Store
+build
+
+!src/leveldb-*/Makefile
+
