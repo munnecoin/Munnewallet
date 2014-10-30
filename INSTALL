@@ -1,0 +1,9 @@
+Building Munne
+
+See doc/readme-qt.rst for instructions on building Munne QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Munne.
+
+See doc/build-*.txt for instructions on building Munned,
+the intended-for-services, no-graphical-interface, reference
+implementation of Munne.
