@@ -394,7 +394,7 @@ bool CTransaction::AreInputsStandard(const MapPrevTx& mapInputs) const
     return true;
 }
 
-unsigned int GetLegacySigOpCount(const CTransaction& tx)
+unsigned int CTransaction::GetLegacySigOpCount(const CTransaction& tx)
 {
     unsigned int nSigOps = 0;
     BOOST_FOREACH(const CTxIn& txin, tx.vin)
