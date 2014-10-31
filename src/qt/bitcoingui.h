@@ -126,6 +126,8 @@ private:
     /** Keep track of previous number of blocks, to detect progress */
     int prevBlocks;
 
+    uint64_t nWeight;
+
     /** Create the main UI actions. */
     void createActions();
     /** Create the menu bar and sub-menus. */
