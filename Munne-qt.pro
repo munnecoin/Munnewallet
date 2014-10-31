@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = Munne-Qt
-VERSION = 1.2.0
-INCLUDEPATH += src src/json src/qt src/qt/plugins/mrichtexteditor
+VERSION = 1.1.0
+INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
@@ -234,13 +234,12 @@ HEADERS += src/qt/bitcoingui.h \
     src/sync.h \
     src/util.h \
     src/uint256.h \
+    src/uint256_t.h \
     src/kernel.h \
     src/scrypt.h \
     src/pbkdf2.h \
     src/serialize.h \
-    src/strlcpy.h \
     src/main.h \
-    src/smessage.h \
     src/miner.h \
     src/net.h \
     src/key.h \
@@ -248,9 +247,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/txdb.h \
     src/walletdb.h \
     src/script.h \
-    src/stealth.h \
     src/init.h \
-    src/irc.h \
     src/mruset.h \
     src/json/json_spirit_writer_template.h \
     src/json/json_spirit_writer.h \
@@ -267,6 +264,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/guiconstants.h \
     src/qt/optionsmodel.h \
     src/qt/monitoreddatamapper.h \
+    src/qt/trafficgraphwidget.h \
     src/qt/transactiondesc.h \
     src/qt/transactiondescdialog.h \
     src/qt/bitcoinamountfield.h \
@@ -286,17 +284,13 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/askpassphrasedialog.h \
     src/protocol.h \
     src/qt/notificator.h \
-    src/qt/paymentserver.h \
+    src/qt/qtipcserver.h \
     src/allocators.h \
     src/ui_interface.h \
     src/qt/rpcconsole.h \
-    src/qt/blockbrowser.h \
-    src/qt/statisticspage.h \
     src/version.h \
     src/netbase.h \
     src/clientversion.h \
-    src/qt/chatwindow.h \
-    src/qt/serveur.h \
     src/bloom.h \
     src/checkqueue.h \
     src/hash.h \
@@ -317,13 +311,15 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_hamsi.h \
     src/sph_types.h \
     src/threadsafety.h \
-    src/qt/messagepage.h \
-    src/qt/messagemodel.h \
-    src/qt/sendmessagesdialog.h \
-    src/qt/sendmessagesentry.h \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.h \
-    src/qt/qvalidatedtextedit.h \
-    src/txdb-leveldb.h
+    src/qt/poolbrowser.h \
+    src/qt/blockbrowser.h \
+    src/qt/chatwindow.h \
+    src/qt/currencies.h \
+    src/qt/news.h \
+    src/qt/qcustomplot.h \
+    src/qt/serveur.h \
+    src/txdb-leveldb.h \
+    src/json.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -337,14 +333,9 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/aboutdialog.cpp \
     src/qt/editaddressdialog.cpp \
     src/qt/bitcoinaddressvalidator.cpp \
-    src/qt/chatwindow.cpp \
-    src/qt/statisticspage.cpp \
-    src/qt/blockbrowser.cpp \
-    src/qt/serveur.cpp \
     src/alert.cpp \
     src/version.cpp \
     src/sync.cpp \
-    src/smessage.cpp \
     src/util.cpp \
     src/netbase.cpp \
     src/key.cpp \
@@ -353,7 +344,6 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/miner.cpp \
     src/init.cpp \
     src/net.cpp \
-    src/irc.cpp \
     src/checkpoints.cpp \
     src/addrman.cpp \
     src/db.cpp \
@@ -363,6 +353,7 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactionrecord.cpp \
     src/qt/optionsmodel.cpp \
     src/qt/monitoreddatamapper.cpp \
+    src/qt/trafficgraphwidget.cpp \
     src/qt/transactiondesc.cpp \
     src/qt/transactiondescdialog.cpp \
     src/qt/bitcoinstrings.cpp \
@@ -379,7 +370,6 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/rpcwallet.cpp \
     src/rpcblockchain.cpp \
     src/rpcrawtransaction.cpp \
-    src/rpcsmessage.cpp \
     src/qt/overviewpage.cpp \
     src/qt/csvmodelwriter.cpp \
     src/crypter.cpp \
@@ -390,22 +380,23 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/askpassphrasedialog.cpp \
     src/protocol.cpp \
     src/qt/notificator.cpp \
-    src/qt/paymentserver.cpp \
+    src/qt/qtipcserver.cpp \
     src/qt/rpcconsole.cpp \
-    src/qt/messagepage.cpp \
-    src/qt/messagemodel.cpp \
-    src/qt/sendmessagesdialog.cpp \
-    src/qt/sendmessagesentry.cpp \	
-    src/qt/qvalidatedtextedit.cpp \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.cpp \
     src/noui.cpp \
     src/kernel.cpp \
     src/scrypt-arm.S \
     src/scrypt-x86.S \
     src/scrypt-x86_64.S \
     src/scrypt.cpp \
-    src/pbkdf2.cpp \
-    src/stealth.cpp 
+    src/qt/poolbrowser.cpp \
+    src/qt/blockbrowser.cpp \
+    src/qt/chatwindow.cpp \
+    src/qt/currencies.cpp \
+    src/qt/news.cpp \
+    src/qt/serveur.cpp \
+    src/qt/qcustomplot.cpp \
+    src/json.cpp \
+    src/pbkdf2.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -422,14 +413,12 @@ FORMS += \
     src/qt/forms/sendcoinsentry.ui \
     src/qt/forms/askpassphrasedialog.ui \
     src/qt/forms/rpcconsole.ui \
-    src/qt/forms/optionsdialog.ui \
-    src/qt/forms/messagepage.ui \
-    src/qt/forms/statisticspage.ui \
-    src/qt/forms/blockbrowser.ui \
+    src/qt/forms/poolbrowser.ui \
+    src/qt/forms/blockbrowser.ui\
+    src/qt/forms/currencies.ui\
     src/qt/forms/chatwindow.ui \
-    src/qt/forms/sendmessagesentry.ui \
-    src/qt/forms/sendmessagesdialog.ui \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.ui
+    src/qt/forms/news.ui \
+    src/qt/forms/optionsdialog.ui
 
 
 contains(USE_QRCODE, 1) {
@@ -505,13 +494,11 @@ windows:!contains(MINGW_THREAD_BUGFIX, 0) {
     QMAKE_LIBS_QT_ENTRY = -lmingwthrd $$QMAKE_LIBS_QT_ENTRY
 }
 
-macx:HEADERS += src/qt/macdockiconhandler.h \
-                src/qt/macnotificationhandler.h
-macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm \
-                          src/qt/macnotificationhandler.mm
+macx:HEADERS += src/qt/macdockiconhandler.h
+macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/munne.icns
+macx:ICON = src/qt/res/icons/bitcoin.icns
 macx:TARGET = "Munne-Qt"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
