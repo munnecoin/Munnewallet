@@ -59,7 +59,7 @@
 #include <QDesktopServices>
 #include <QTimer>
 #include <QDragEnterEvent>
-#include <QUrl>g
+#include <QUrl>
 #include <QStyle>
 
 #include <iostream>
