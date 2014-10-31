@@ -608,6 +608,7 @@ void BitcoinGUI::setNumBlocks(int count, int nTotalBlocks)
         return;
     }
 
+    bool fShowStatusBar = false;
     QString strStatusBarWarnings = clientModel->getStatusBarWarnings();
     QString tooltip;
 
