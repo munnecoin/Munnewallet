@@ -592,21 +592,6 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
             // Disable replacement feature for now
             return false;
 
-            // Allow replacing with a newer version of the same transaction
-            if (i != 0)
-                return false;
-            ptxOld = mapNextTx[outpoint].ptx;
-            if (ptxOld->IsFinal())
-                return false;
-            if (!tx.IsNewerThan(*ptxOld))
-                return false;
-            for (unsigned int i = 0; i < tx.vin.size(); i++)
-            {
-                COutPoint outpoint = tx.vin[i].prevout;
-                if (!mapNextTx.count(outpoint) || mapNextTx[outpoint].ptx != ptxOld)
-                    return false;
-            }
-            break;
         }
     }
 
