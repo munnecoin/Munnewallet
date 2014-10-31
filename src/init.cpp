@@ -400,13 +400,6 @@ bool AppInit2()
     nDerivationMethodIndex = 0;
 
     fTestNet = GetBoolArg("-testnet");
-<<<<<<< HEAD
-    //fTestNet = true;
-    if (fTestNet) {
-        SoftSetBoolArg("-irc", true);
-    }
-=======
->>>>>>> 2970776... (finally) Remove IRC Seed support now that lfnet is down.
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
