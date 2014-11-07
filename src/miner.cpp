@@ -126,8 +126,10 @@ CBlock* CreateNewBlock(CWallet* pwallet, bool fProofOfStake, int64_t* pFees)
     if (!fProofOfStake)
     {
         CReserveKey reservekey(pwallet);
-        txNew.vout[0].scriptPubKey.SetDestination(reservekey.GetReservedKey().GetID());
-        txNew.vout[1].scriptPubKey.SetDestination(address.Get());
+        CPubKey pubkey;
+        if (!reservekey.GetReservedKey(pubkey))
+            return NULL;
+        txNew.vout[0].scriptPubKey.SetDestination(pubkey.GetID());
     }
     else
     {
@@ -538,7 +540,6 @@ void StakeMiner(CWallet *pwallet)
 
         while (pwallet->IsLocked())
         {
-            nLastCoinStakeSearchInterval = 0;
             MilliSleep(1000);
             if (fShutdown)
                 return;
@@ -546,8 +547,6 @@ void StakeMiner(CWallet *pwallet)
 
         while (vNodes.empty() || IsInitialBlockDownload())
         {
-            nLastCoinStakeSearchInterval = 0;
-            fTryToSync = true;
             MilliSleep(1000);
             if (fShutdown)
                 return;

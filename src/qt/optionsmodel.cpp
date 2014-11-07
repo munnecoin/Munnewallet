@@ -42,7 +42,6 @@ void OptionsModel::Init()
 
     // These are Qt-only settings:
     nDisplayUnit = settings.value("nDisplayUnit", BitcoinUnits::BTC).toInt();
-    bDisplayAddresses = settings.value("bDisplayAddresses", false).toBool();
     fMinimizeToTray = settings.value("fMinimizeToTray", false).toBool();
     fMinimizeOnClose = settings.value("fMinimizeOnClose", false).toBool();
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
@@ -58,8 +57,8 @@ void OptionsModel::Init()
         SoftSetArg("-proxy", settings.value("addrProxy").toString().toStdString());
     if (settings.contains("nSocksVersion") && settings.value("fUseProxy").toBool())
         SoftSetArg("-socks", settings.value("nSocksVersion").toString().toStdString());
-    if (settings.contains("detachDB"))
-        SoftSetBoolArg("-detachdb", settings.value("detachDB").toBool());
+    if (settings.contains("fMinimizeCoinAge"))
+        SoftSetBoolArg("-minimizecoinage", settings.value("fMinimizeCoinAge").toBool());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
 }
@@ -168,14 +167,12 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return QVariant((qint64) nReserveBalance);
         case DisplayUnit:
             return QVariant(nDisplayUnit);
-        case DisplayAddresses:
-            return QVariant(bDisplayAddresses);
-        case DetachDatabases:
-            return QVariant(bitdb.GetDetach());
         case Language:
             return settings.value("language", "");
         case CoinControlFeatures:
             return QVariant(fCoinControlFeatures);
+        case MinimizeCoinAge:
+            return settings.value("fMinimizeCoinAge", GetBoolArg("-minimizecoinage", false));
         default:
             return QVariant();
         }
@@ -257,16 +254,6 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nDisplayUnit", nDisplayUnit);
             emit displayUnitChanged(nDisplayUnit);
             break;
-        case DisplayAddresses:
-            bDisplayAddresses = value.toBool();
-            settings.setValue("bDisplayAddresses", bDisplayAddresses);
-            break;
-        case DetachDatabases: {
-            bool fDetachDB = value.toBool();
-            bitdb.SetDetach(fDetachDB);
-            settings.setValue("detachDB", fDetachDB);
-            }
-            break;
         case Language:
             settings.setValue("language", value);
             break;
@@ -276,6 +263,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             emit coinControlFeaturesChanged(fCoinControlFeatures);
             }
             break;
+        case MinimizeCoinAge:
+           fMinimizeCoinAge = value.toBool();
+           settings.setValue("fMinimizeCoinAge", fMinimizeCoinAge);
+           break;
         default:
             break;
         }
@@ -313,9 +304,4 @@ bool OptionsModel::getMinimizeOnClose()
 int OptionsModel::getDisplayUnit()
 {
     return nDisplayUnit;
-}
-
-bool OptionsModel::getDisplayAddresses()
-{
-    return bDisplayAddresses;
 }
